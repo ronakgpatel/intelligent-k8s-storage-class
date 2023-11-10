@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: webhook
-        image:   #image
+        image: <image>  #image
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 443

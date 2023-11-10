@@ -22,12 +22,12 @@ This contains the steps and code that can be used to create and apply(mutate) PV
   openssl req -x509 -nodes -days 730 -newkey rsa:2048 -keyout security/webhook.key -out security/webhook.crt -config security/req.conf -extensions 'v3_req' -CA security/rootca.crt -CAkey security/rootca.key
 
 ```
+# Before creating the webhook configuration and deployment, make sure to do the following
+1. Before creating webhook-manifests, make sure to update webhook.crt, webhook.key in the webhook-secret.yaml in the webhook-manifests folder.
 
-Before creating webhook-manifests, make sure to update webhook.crt, webhook.key in the webhook-secret.yaml in the webhook-manifests folder.
+2. Also provide the clientConfig.caBundle in the webhook-mutate-config.yaml before creation of webhook configuration.
 
-
-Also provide the clientConfig.caBundle in the webhook-mutate-config.yaml before creation of webhook configuration.
-
+3. Create docker image with given Dockerfile and update the correct in the webhook-mutate-deploy.yaml
 ```
 
   kubectl -n default create -f webhook-manifests/
