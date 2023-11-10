@@ -1,0 +1,2 @@
+#kubectl get secret pod-checker-secret -o yaml -o jsonpath='{.data.token}' | base64 -d > token
+#kubectl get secret pod-checker-secret -o yaml -o jsonpath='{.data.ca\.crt}' | base64 -d > ca.crt \

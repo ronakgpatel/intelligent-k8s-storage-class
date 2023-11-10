@@ -1,0 +1,16 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: pod-checker  
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  - configmaps
+  - storageclass
+  - statefulsets
+  verbs:
+  - watch
+  - get
+  - list

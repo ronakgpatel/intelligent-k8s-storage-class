@@ -1,0 +1,8 @@
+apiVersion: v1
+data:  
+  "pvcselector": "volume=resilient-volumes"
+  "storageclassnames": "first-fd-sc, second-fd-sc"   
+  "description" : "The key stroageclassnames would take comma separate names of the storage classes that would be used for each replica attached PVC. For example, first value would be applied for first replica PVC, second would be applied for the second pod replica PVC and so on."
+kind: ConfigMap
+metadata:
+  name: storageclass-config-cm
