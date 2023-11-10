@@ -21,6 +21,13 @@ This contains the steps and code that can be used to create and apply(mutate) PV
   openssl req -x509 -sha256 -new -nodes -key  rootca.key  -days 3650 -out rootca.crt ## here make sure to provide the details that matches req.conf values. 
   openssl req -x509 -nodes -days 730 -newkey rsa:2048 -keyout security/webhook.key -out security/webhook.crt -config security/req.conf -extensions 'v3_req' -CA security/rootca.crt -CAkey security/rootca.key
 
+```
+
+Before creating webhook-manifests, make sure to update webhook.crt, webhook.key in the webhook-secret.yaml in the webhook-manifests folder.
+Also provide the clientConfig.caBundle in the webhook-mutate-config.yaml before creation of webhook configuration.
+
+```
+
   kubectl -n default create -f webhook-manifests/
   kubectl -n default get secret pod-checker-secret -o yaml -o jsonpath='{.data.token}' | base64 -d > security/token
   kubectl -n default get secret pod-checker-secret -o yaml -o jsonpath='{.data.ca\.crt}' | base64 -d > security/ca.crt 

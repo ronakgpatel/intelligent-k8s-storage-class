@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mutate-webhook
+  labels:
+    app: mutate
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mutate
+  template:
+    metadata:
+      labels:
+        app: mutate
+    spec:
+      containers:
+      - name: webhook
+        image:   #image
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 443
+        env:
+        - name: KUBE_API_SERVER
+          value: https://10.96.0.1:443
+        - name: LABEL
+          value: development
+        volumeMounts:
+        - name: certs-volume
+          readOnly: true
+          mountPath: "/certs"
+        - name: pod-secret-volume
+          readOnly: true
+          mountPath: "/app/k8s-security/"          
+      volumes:
+      - name: certs-volume
+        secret:
+          secretName: admission-tls
+      - name: pod-secret-volume
+        secret:
+          secretName: pod-checker-secret          
