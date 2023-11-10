@@ -18,4 +18,3 @@ openssl req -x509 -sha256 -new -nodes -key  rootca.key  -days 3650 -out rootca.c
 openssl req -x509 -nodes -days 730 -newkey rsa:2048 -keyout security/webhook.key -out security/webhook.crt -config security/req.conf -extensions 'v3_req' -CA security/rootca.crt -CAkey security/rootca.key
 
 
-## Integrate with your tools
